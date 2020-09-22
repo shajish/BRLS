@@ -24,7 +24,7 @@ class BookTest {
 	}
 
 	@Test
-	void testIsAvailable() {
+	void testIsAvailableTrue() {
 		//arrange
 		boolean expected = true;
 		//act
