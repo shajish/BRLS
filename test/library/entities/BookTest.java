@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BookTest {
-
 	IBook book;
 	String title= "t";
 	String author = "a";
@@ -32,5 +31,4 @@ class BookTest {
 		//assert
 		assertEquals(expected, actual);
 	}
-
 }

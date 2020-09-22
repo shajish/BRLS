@@ -19,7 +19,6 @@ public class Book implements Serializable, IBook {
         this.id = id;
         this.state = BookState.AVAILABLE;
     }
-
     
     @Override
     public int getId() {
