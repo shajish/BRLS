@@ -60,4 +60,15 @@ class BookTest1 {
 		//assert
 		assertEquals(t.getMessage(), "Book: cannot borrow while book is in state: ON_LOAN");
 	}
+	
+	@Test
+	void testBorrowFromLibraryWhenDamaged() {
+		//arrange
+		book=new Book(author,title,callNumber,id,BookState.DAMAGED);
+		//act
+		Executable e = () ->book.borrowFromLibrary();
+		Throwable t = assertThrows(RuntimeException.class, e);
+		//assert
+		assertEquals(t.getMessage(), "Book: cannot borrow while book is in state: DAMAGED");
+	}
 }
