@@ -43,5 +43,16 @@ class LibraryTest {
 		//assert
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	void testPatronCanBorrowWhenLoanLimitIsCrossed() {
+		//arrange
+		when(PatronMock.getNumberOfCurrentLoans()).thenReturn(ILibrary.LOAN_LIMIT +1);
+		boolean expected = false;
+		//act
+		boolean actual = library.patronCanBorrow(PatronMock);
+		//assert
+		assertEquals(expected, actual);
+	}
 
 }
