@@ -34,7 +34,7 @@ class LibraryTest {
 	@Test
 	void testPatronCanBorrowWhenAllConditionsTrue() {
 		//arrange
-		when(PatronMock.getNumberOfCurrentLoans()).thenReturn(0);
+		when(PatronMock.getNumberOfCurrentLoans()).thenReturn(ILibrary.LOAN_LIMIT -1);
 		when(PatronMock.getFinesPayable()).thenReturn((0.0));
 		when(PatronMock.hasOverDueLoans()).thenReturn(false);
 		boolean expected = true;
@@ -48,6 +48,28 @@ class LibraryTest {
 	void testPatronCanBorrowWhenLoanLimitIsCrossed() {
 		//arrange
 		when(PatronMock.getNumberOfCurrentLoans()).thenReturn(ILibrary.LOAN_LIMIT +1);
+		boolean expected = false;
+		//act
+		boolean actual = library.patronCanBorrow(PatronMock);
+		//assert
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	void testPatronCanBorrowWhenMaxFinesOwnedIsCrossed() {
+		//arrange
+		when(PatronMock.getFinesPayable()).thenReturn((library.MAX_FINES_OWED +1));
+		boolean expected = false;
+		//act
+		boolean actual = library.patronCanBorrow(PatronMock);
+		//assert
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	void testPatronCanBorrowWhenHasOverDueLoans() {
+		//arrange
+		when(PatronMock.hasOverDueLoans()).thenReturn(true);
 		boolean expected = false;
 		//act
 		boolean actual = library.patronCanBorrow(PatronMock);
